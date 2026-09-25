@@ -90,7 +90,31 @@ export const gymService = {
     const { data: userData, error: userError } = await supabase.auth.getUser();
     if (userError || !userData?.user) return [];
     const userId = userData.user.id;
+    const userEmail = userData.user.email?.toLowerCase().trim();
 
+    // Check if current user is Super Admin
+    const isSuper = userEmail && (
+      ['tigerchitransh@gmail.com', 'chitranshm13@gmail.com', 'sonurambo78@gmail.com'].includes(userEmail) ||
+      userData.user.user_metadata?.is_super_admin === true ||
+      userData.user.user_metadata?.role === 'superadmin'
+    );
+
+    if (isSuper) {
+      // Super Admin can access and manage all gyms on the platform
+      const { data: allGyms, error: allGymsErr } = await supabase
+        .from('gyms')
+        .select('*')
+        .order('created_at', { ascending: false });
+
+      if (!allGymsErr && allGyms && allGyms.length > 0) {
+        return allGyms.map(g => ({
+          gym: g as Gym,
+          role: 'owner',
+        }));
+      }
+    }
+
+    // 1. Try querying via gym_users link
     const { data, error } = await supabase
       .from('gym_users')
       .select(`
@@ -99,16 +123,50 @@ export const gymService = {
       `)
       .eq('user_id', userId);
 
-    if (error || !data || data.length === 0) {
-      return [];
+    if (!error && data && data.length > 0) {
+      const validGyms = data
+        .filter((item: any) => item.gym)
+        .map((item: any) => ({
+          gym: item.gym as Gym,
+          role: item.role,
+        }));
+
+      if (validGyms.length > 0) {
+        return validGyms;
+      }
     }
 
-    return data
-      .filter((item: any) => item.gym)
-      .map((item: any) => ({
-        gym: item.gym as Gym,
-        role: item.role,
-      }));
+    // 2. Auto-heal fallback: Check if a gym exists with matching owner email
+    if (userEmail) {
+      try {
+        const { data: matchedGyms } = await supabase
+          .from('gyms')
+          .select('*')
+          .ilike('email', userEmail);
+
+        if (matchedGyms && matchedGyms.length > 0) {
+          // Link this authenticated user to their gym
+          for (const mg of matchedGyms) {
+            await supabase
+              .from('gym_users')
+              .upsert({
+                gym_id: mg.id,
+                user_id: userId,
+                role: 'owner',
+              }, { onConflict: 'gym_id,user_id' });
+          }
+
+          return matchedGyms.map(g => ({
+            gym: g as Gym,
+            role: 'owner',
+          }));
+        }
+      } catch (err) {
+        console.warn('Auto-heal gym lookup error:', err);
+      }
+    }
+
+    return [];
   },
 
   async createGym(gymData: {

@@ -4,12 +4,27 @@ import { getSupabaseClient, checkDatabaseConnection, ConnectionCheckResult } fro
 import { Gym, GymRole } from '../types';
 import { gymService } from '../services/api';
 
+export const SUPER_ADMIN_EMAILS = [
+  'tigerchitransh@gmail.com',
+  'chitranshm13@gmail.com',
+  'sonurambo78@gmail.com',
+];
+
+export function checkIsSuperAdmin(user?: User | null): boolean {
+  if (!user) return false;
+  const email = user.email?.toLowerCase().trim();
+  if (email && SUPER_ADMIN_EMAILS.includes(email)) return true;
+  if (user.user_metadata?.is_super_admin === true || user.user_metadata?.role === 'superadmin') return true;
+  return false;
+}
+
 interface AuthContextType {
   user: User | null;
   loading: boolean;
   activeGym: Gym | null;
   activeRole: GymRole | null;
   gyms: { gym: Gym; role: string }[];
+  isSuperAdmin: boolean;
   connectionStatus: ConnectionCheckResult | null;
   checkingConnection: boolean;
   refreshGyms: () => Promise<void>;
@@ -211,7 +226,9 @@ export const AuthProvider: React.FC<{ children: React.ReactNode }> = ({ children
       password,
       options: {
         data: {
+          name: fullName.trim(),
           full_name: fullName.trim(),
+          display_name: fullName.trim(),
         },
       },
     });
@@ -220,7 +237,22 @@ export const AuthProvider: React.FC<{ children: React.ReactNode }> = ({ children
     if (data.session) {
       setUser(data.user);
       await loadGymsForUser();
+      return { session: data.session, user: data.user };
     }
+
+    // Attempt direct sign in right away
+    try {
+      const loginRes = await client.auth.signInWithPassword({
+        email: email.trim(),
+        password,
+      });
+      if (loginRes.data?.session) {
+        setUser(loginRes.data.user);
+        await loadGymsForUser();
+        return { session: loginRes.data.session, user: loginRes.data.user };
+      }
+    } catch {}
+
     return { session: data.session, user: data.user };
   };
 
@@ -245,26 +277,43 @@ export const AuthProvider: React.FC<{ children: React.ReactNode }> = ({ children
     const client = getSupabaseClient();
     if (!client) throw new Error('Supabase client is not connected.');
 
+    const cleanToken = token.trim().replace(/\D/g, '');
+    if (cleanToken.length !== 6) {
+      throw new Error('Please enter all 6 digits of the OTP code sent to your email.');
+    }
+
     let authedUser: User | null = null;
 
+    // 1. Try with type: 'email' (Standard Supabase numeric email OTP)
     const { data, error } = await client.auth.verifyOtp({
       email: email.trim(),
-      token: token.trim(),
+      token: cleanToken,
       type: 'email',
     });
 
     if (error) {
-      // In case Supabase configured OTP under 'signup' type
+      // 2. Try with type: 'signup' (if user is registering for the first time)
       const retryResult = await client.auth.verifyOtp({
         email: email.trim(),
-        token: token.trim(),
+        token: cleanToken,
         type: 'signup' as any,
       });
 
       if (retryResult.error) {
-        throw error;
+        // 3. Try with type: 'magiclink'
+        const retryMagic = await client.auth.verifyOtp({
+          email: email.trim(),
+          token: cleanToken,
+          type: 'magiclink' as any,
+        });
+
+        if (retryMagic.error) {
+          throw new Error('Invalid or expired 6-digit OTP code. Please check your email or click resend.');
+        }
+        authedUser = retryMagic.data.user;
+      } else {
+        authedUser = retryResult.data.user;
       }
-      authedUser = retryResult.data.user;
     } else {
       authedUser = data.user;
     }
@@ -306,6 +355,7 @@ export const AuthProvider: React.FC<{ children: React.ReactNode }> = ({ children
         activeGym,
         activeRole,
         gyms,
+        isSuperAdmin: checkIsSuperAdmin(user),
         connectionStatus,
         checkingConnection,
         refreshGyms,

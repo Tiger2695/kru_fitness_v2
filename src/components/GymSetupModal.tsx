@@ -46,10 +46,26 @@ export const GymSetupModal: React.FC<Props> = ({ isOpen, onClose }) => {
         name: name.trim(),
         owner_name: ownerName.trim(),
         phone: phone.trim(),
+        email: user?.email || undefined,
         city: city.trim() || undefined,
         address: address.trim() || undefined,
         attendance_enabled: attendanceEnabled,
       });
+
+      // Also sync user metadata to Supabase Auth so it displays nicely in Supabase dashboard
+      try {
+        const client = (await import('../lib/supabase')).getSupabaseClient();
+        if (client) {
+          await client.auth.updateUser({
+            data: {
+              name: ownerName.trim(),
+              full_name: ownerName.trim(),
+              display_name: ownerName.trim(),
+              phone_number: phone.trim(),
+            },
+          });
+        }
+      } catch {}
 
       await refreshGyms();
       if (onClose) onClose();
