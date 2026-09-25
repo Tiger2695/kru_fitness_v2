@@ -1,0 +1,7 @@
+{
+  "name": "Kru Fitness",
+  "description": "A simple gym management product by KruSpace for Indian gym owners to manage members, payments, renewals, and attendance.",
+  "requestFramePermissions": [],
+  "majorCapabilities": ["MAJOR_CAPABILITY_SERVER_SIDE_GEMINI_API"]
+}
+

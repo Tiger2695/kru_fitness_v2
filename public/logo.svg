@@ -1,0 +1,17 @@
+<svg viewBox="0 0 512 512" fill="none" xmlns="http://www.w3.org/2000/svg">
+  <defs>
+    <linearGradient id="kruBgGrad" x1="64" y1="64" x2="448" y2="448" gradientUnits="userSpaceOnUse">
+      <stop offset="0%" stop-color="#0F172A" />
+      <stop offset="100%" stop-color="#115E59" />
+    </linearGradient>
+    <linearGradient id="kruTealGrad" x1="200" y1="140" x2="380" y2="300" gradientUnits="userSpaceOnUse">
+      <stop offset="0%" stop-color="#2DD4BF" />
+      <stop offset="100%" stop-color="#0D9488" />
+    </linearGradient>
+  </defs>
+  <circle cx="256" cy="256" r="256" fill="url(#kruBgGrad)" />
+  <circle cx="256" cy="256" r="240" stroke="#2DD4BF" stroke-opacity="0.2" stroke-width="4" />
+  <rect x="136" y="128" width="56" height="256" rx="18" fill="#FFFFFF" />
+  <path d="M 206 282 L 328 150 C 337 140 353 140 362 150 C 372 160 372 176 362 186 L 254 302 Z" fill="url(#kruTealGrad)" />
+  <path d="M 238 258 L 344 366 C 354 376 354 392 344 402 C 334 412 318 412 308 402 L 206 300 Z" fill="#FFFFFF" />
+</svg>
