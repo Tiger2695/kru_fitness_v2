@@ -36,7 +36,7 @@ export function openWhatsApp(phone: string, text: string): void {
 }
 
 /**
- * Message template generators for common gym alerts.
+ * Message template generators for common gym alerts (English).
  */
 export const whatsappTemplates = {
   /**
@@ -54,20 +54,20 @@ export const whatsappTemplates = {
     
     let timeStatus = '';
     if (daysRemaining < 0) {
-      timeStatus = `*${Math.abs(daysRemaining)} din pehle (${formatDate(endDate)}) expire ho chuki hai.*`;
+      timeStatus = `*expired ${Math.abs(daysRemaining)} days ago on ${formatDate(endDate)}.*`;
     } else if (daysRemaining === 0) {
-      timeStatus = `*aaj (${formatDate(endDate)}) expire ho rahi hai.*`;
+      timeStatus = `*expires today (${formatDate(endDate)}).*`;
     } else {
-      timeStatus = `agle *${daysRemaining} dinon mein (${formatDate(endDate)}) expire hone wali hai.*`;
+      timeStatus = `*will expire in ${daysRemaining} days on ${formatDate(endDate)}.*`;
     }
 
-    return `Namaste *${memberName}* ji! 🙏
+    return `Hello *${memberName}*! 👋
 
-Aapki *${gymName}* mein *${planName}* gym membership ${timeStatus}
+Your *${planName}* gym membership at *${gymName}* ${timeStatus}
 
-Workout streak continue rakhne ke liye kripya apni membership timely renew karwayein.
+To continue your training streak without interruption, please renew your membership at your earliest convenience.
 
-Fitness goals ko rukne na dein! 💪
+Stay dedicated to your fitness goals! 💪
 ${gymPhone ? `📞 Contact: ${gymPhone}` : ''}
 — Team *${gymName}*`;
   },
@@ -88,14 +88,14 @@ ${gymPhone ? `📞 Contact: ${gymPhone}` : ''}
   }) => {
     const { gymName, memberName, amount, paymentMethod, paymentDate, receiptNo, planName, remainingDue, gymPhone } = params;
 
-    let receiptMsg = `Namaste *${memberName}* ji! 🙏\n\n`;
-    receiptMsg += `Aapka payment *${gymName}* ko safaltapoorvak receive ho gaya hai.\n\n`;
-    receiptMsg += `🧾 *Payment Receipt:*\n`;
+    let receiptMsg = `Hello *${memberName}*! 👋\n\n`;
+    receiptMsg += `Your payment to *${gymName}* has been successfully received.\n\n`;
+    receiptMsg += `🧾 *Official Payment Receipt:*\n`;
     receiptMsg += `• Amount Paid: *${formatINR(amount)}*\n`;
     receiptMsg += `• Date: ${formatDate(paymentDate)}\n`;
-    receiptMsg += `• Mode: ${paymentMethod.toUpperCase()}\n`;
-    if (receiptNo) receiptMsg += `• Ref/Receipt No: ${receiptNo}\n`;
-    if (planName) receiptMsg += `• Plan: ${planName}\n`;
+    receiptMsg += `• Payment Mode: ${paymentMethod.toUpperCase()}\n`;
+    if (receiptNo) receiptMsg += `• Ref / Receipt No: ${receiptNo}\n`;
+    if (planName) receiptMsg += `• Membership Plan: ${planName}\n`;
     
     if (remainingDue !== undefined && remainingDue > 0) {
       receiptMsg += `\n⚠️ *Pending Balance:* ${formatINR(remainingDue)}\n`;
@@ -103,7 +103,7 @@ ${gymPhone ? `📞 Contact: ${gymPhone}` : ''}
       receiptMsg += `\n✅ *Status:* Fees Fully Cleared\n`;
     }
 
-    receiptMsg += `\nHumare saath judne ke liye dhanyavaad! Healthy rahein, fit rahein! 🏋️‍♂️\n`;
+    receiptMsg += `\nThank you for working out with us! Stay strong and healthy! 🏋️‍♂️\n`;
     if (gymPhone) receiptMsg += `📞 Contact: ${gymPhone}\n`;
     receiptMsg += `— Team *${gymName}*`;
 
@@ -122,13 +122,13 @@ ${gymPhone ? `📞 Contact: ${gymPhone}` : ''}
   }) => {
     const { gymName, memberName, dueAmount, planName, gymPhone } = params;
 
-    return `Namaste *${memberName}* ji! 🙏
+    return `Hello *${memberName}*! 👋
 
-Aapka *${gymName}* mein *${formatINR(dueAmount)}* ka fees balance pending hai${planName ? ` (${planName})` : ''}.
+This is a gentle reminder regarding your pending fee balance of *${formatINR(dueAmount)}* at *${gymName}*${planName ? ` for your ${planName} plan` : ''}.
 
-Kripya apni suvidhanusar counter par ya online (UPI) ke dwara payment clear kar dein.
+Kindly clear the balance at the reception counter or via online UPI at your convenience.
 
-Shukriya!
+Thank you!
 ${gymPhone ? `📞 Contact: ${gymPhone}` : ''}
 — Team *${gymName}*`;
   },
@@ -146,14 +146,14 @@ ${gymPhone ? `📞 Contact: ${gymPhone}` : ''}
   }) => {
     const { gymName, memberName, planName, startDate, endDate, gymPhone } = params;
 
-    return `Welcome to *${gymName}*, *${memberName}* ji! 🎉🏋️‍♂️
+    return `Welcome to *${gymName}*, *${memberName}*! 🎉🏋️‍♂️
 
-Aapka fitness journey shuru ho chuka hai!
+Your fitness journey officially starts today!
 • Plan: *${planName}*
 • Start Date: ${formatDate(startDate)}
-• Valid Till: ${formatDate(endDate)}
+• Valid Until: ${formatDate(endDate)}
 
-Consistency hi success ki chaabi hai. See you in the gym today! 💪
+Consistency is the key to lasting progress. See you on the gym floor! 💪
 ${gymPhone ? `📞 Helpline: ${gymPhone}` : ''}
 — Team *${gymName}*`;
   }

@@ -5,14 +5,12 @@ import {
   Smartphone,
   CreditCard,
   Users,
-  Calendar,
   CheckCircle,
   QrCode,
   Shield,
   HelpCircle,
   Printer,
   ExternalLink,
-  ChevronRight,
   Sparkles,
 } from 'lucide-react';
 
@@ -45,10 +43,10 @@ export const UserManualModal: React.FC<UserManualModalProps> = ({ isOpen, onClos
               <div className="flex items-center space-x-2">
                 <h2 className="text-lg font-bold text-white">Kru Fitness — User Manual</h2>
                 <span className="px-2 py-0.5 text-[10px] font-semibold tracking-wider bg-teal-500/20 text-teal-300 border border-teal-500/30 rounded-full uppercase">
-                  v2.0 Guide
+                  Operating Guide
                 </span>
               </div>
-              <p className="text-xs text-slate-400">Complete operating manual for Gym Owners & Staff</p>
+              <p className="text-xs text-slate-400">Complete guide for Gym Owners, Managers, and Reception Staff</p>
             </div>
           </div>
           <div className="flex items-center space-x-2">
@@ -89,12 +87,12 @@ export const UserManualModal: React.FC<UserManualModalProps> = ({ isOpen, onClos
         {/* Navigation Tabs */}
         <div className="border-b border-slate-200 bg-slate-50 px-4 sm:px-6 flex overflow-x-auto space-x-1 py-2 scrollbar-none">
           {[
-            { id: 'install', label: '📱 App Install', icon: Smartphone },
-            { id: 'login', label: '🔐 Login & OTP', icon: Shield },
-            { id: 'members', label: '👥 Members', icon: Users },
+            { id: 'install', label: '📱 App Installation', icon: Smartphone },
+            { id: 'login', label: '🔐 Login & Security', icon: Shield },
+            { id: 'members', label: '👥 Members & Plans', icon: Users },
             { id: 'payments', label: '💳 Payments & UPI', icon: CreditCard },
-            { id: 'attendance', label: '🕒 Attendance', icon: QrCode },
-            { id: 'faq', label: '❓ FAQ & Help', icon: HelpCircle },
+            { id: 'attendance', label: '🕒 Attendance & Check-in', icon: QrCode },
+            { id: 'faq', label: '❓ FAQ & Support', icon: HelpCircle },
           ].map(tab => {
             const Icon = tab.icon;
             const isActive = activeSection === tab.id;
@@ -102,9 +100,9 @@ export const UserManualModal: React.FC<UserManualModalProps> = ({ isOpen, onClos
               <button
                 key={tab.id}
                 onClick={() => setActiveSection(tab.id as any)}
-                className={`flex items-center space-x-2 px-3.5 py-2 rounded-xl text-xs font-semibold whitespace-nowrap transition-all ${
+                className={`flex items-center space-x-2 px-3.5 py-2 rounded-xl text-xs font-semibold whitespace-nowrap transition-all cursor-pointer ${
                   isActive
-                    ? 'bg-teal-600 text-white shadow-xs'
+                    ? 'bg-teal-700 text-white shadow-xs'
                     : 'text-slate-600 hover:bg-slate-200/60 hover:text-slate-900'
                 }`}
               >
@@ -123,10 +121,10 @@ export const UserManualModal: React.FC<UserManualModalProps> = ({ isOpen, onClos
               <div>
                 <h3 className="text-base font-bold text-slate-900 flex items-center space-x-2">
                   <Smartphone className="w-5 h-5 text-teal-600" />
-                  <span>Phone par Play Store App ki tarah kaise Install karein?</span>
+                  <span>How to Install Kru Fitness on Phones and Tablets</span>
                 </h3>
                 <p className="text-xs text-slate-500 mt-1">
-                  Kru Fitness ek modern Progressive Web App (PWA) hai. Isko bina kisi app store ke 5 second me phone par install kar sakte hain.
+                  Kru Fitness is built as a Progressive Web App (PWA). You can install it on your Android phone, iPhone, iPad, or desktop in 5 seconds without searching app stores.
                 </p>
               </div>
 
@@ -138,10 +136,10 @@ export const UserManualModal: React.FC<UserManualModalProps> = ({ isOpen, onClos
                     <span>Android Phone (Google Chrome)</span>
                   </div>
                   <ol className="text-xs space-y-2 text-slate-700 list-decimal list-inside leading-normal">
-                    <li>Chrome mein <strong className="text-teal-900">{appLiveUrl}</strong> open karein.</li>
-                    <li>Upar right corner mein <strong>3 dots (⋮)</strong> par click karein.</li>
-                    <li>Menu mein <strong>"Install app"</strong> ya <strong>"Add to Home screen"</strong> dabayein.</li>
-                    <li>Ab phone ke apps drawer me <strong>Kru Fitness</strong> ka logo ban jayega aur ye full-screen open hoga!</li>
+                    <li>Open <strong className="text-teal-900">{appLiveUrl}</strong> in Google Chrome.</li>
+                    <li>Tap the <strong>three dots (⋮)</strong> in the top-right corner.</li>
+                    <li>Select <strong>"Install app"</strong> or <strong>"Add to Home screen"</strong>.</li>
+                    <li>Kru Fitness will now appear in your apps list with full-screen native performance!</li>
                   </ol>
                 </div>
 
@@ -152,10 +150,10 @@ export const UserManualModal: React.FC<UserManualModalProps> = ({ isOpen, onClos
                     <span>iPhone / iPad (Safari Browser)</span>
                   </div>
                   <ol className="text-xs space-y-2 text-slate-700 list-decimal list-inside leading-normal">
-                    <li>Safari browser mein link open karein.</li>
-                    <li>Neeche center mein <strong>Share button (arrow wala box)</strong> par click karein.</li>
-                    <li>Scroll karke <strong>"Add to Home Screen"</strong> par tap karein.</li>
-                    <li>Upar <strong>"Add"</strong> dabayein — iPhone screen par app icon ready ho jayega.</li>
+                    <li>Open the link in the <strong>Safari</strong> browser.</li>
+                    <li>Tap the <strong>Share button</strong> (square with arrow pointing up) at the bottom.</li>
+                    <li>Scroll down and tap <strong>"Add to Home Screen"</strong>.</li>
+                    <li>Tap <strong>"Add"</strong> in the top-right corner — the app icon will appear on your home screen.</li>
                   </ol>
                 </div>
               </div>
@@ -166,41 +164,41 @@ export const UserManualModal: React.FC<UserManualModalProps> = ({ isOpen, onClos
                   💻
                 </div>
                 <div className="text-xs text-slate-700 space-y-1">
-                  <p className="font-bold text-slate-900">Gym Reception Computer / Laptop par:</p>
+                  <p className="font-bold text-slate-900">Gym Reception Desktop / Laptop:</p>
                   <p>
-                    Chrome ya Edge browser mein link open karein. Address bar ke right side mein <strong>"Install Kru Fitness"</strong> ka computer icon dikhega. Uspe click karke Desktop par shortcut bana lein taaki receptionist ek click me software open kar sake.
+                    Open the link in Google Chrome or Microsoft Edge. Click the <strong>"Install Kru Fitness"</strong> icon on the right side of the address bar to create a desktop shortcut for quick 1-click launch by your staff.
                   </p>
                 </div>
               </div>
             </div>
           )}
 
-          {/* Section 2: Login & OTP */}
+          {/* Section 2: Login & Password */}
           {activeSection === 'login' && (
             <div className="space-y-5 animate-in fade-in duration-150">
               <h3 className="text-base font-bold text-slate-900 flex items-center space-x-2">
                 <Shield className="w-5 h-5 text-teal-600" />
-                <span>Account Kaise Banayein aur Login Kaise Karein?</span>
+                <span>Account Registration and Authentication</span>
               </h3>
 
               <div className="space-y-4">
                 <div className="border border-slate-200 rounded-xl p-4 space-y-2">
                   <div className="font-bold text-slate-900 text-sm flex items-center space-x-2">
-                    <span className="px-2 py-0.5 rounded bg-teal-100 text-teal-800 text-xs">Option 1</span>
-                    <span>6-Digit Email OTP / Magic Link (Sabse Aasan)</span>
+                    <span className="px-2 py-0.5 rounded bg-teal-100 text-teal-800 text-xs">Sign In</span>
+                    <span>Email & Password Authentication</span>
                   </div>
                   <p className="text-xs text-slate-600">
-                    Aapko password yaad rakhne ki zaroorat nahi hai. Apna email address enter karein aur <strong>"Send 6-Digit OTP"</strong> dabayein. Email par aane wale 6-digit code ko enter karein ya email ke link par click karke turant login ho jayein.
+                    Sign in with your registered email and password to instantly access your gym workspace. The session remains securely remembered across app restarts.
                   </p>
                 </div>
 
                 <div className="border border-slate-200 rounded-xl p-4 space-y-2">
                   <div className="font-bold text-slate-900 text-sm flex items-center space-x-2">
-                    <span className="px-2 py-0.5 rounded bg-slate-100 text-slate-800 text-xs">Option 2</span>
-                    <span>Email & Password</span>
+                    <span className="px-2 py-0.5 rounded bg-slate-100 text-slate-800 text-xs">Create Account</span>
+                    <span>New Gym Owner Onboarding</span>
                   </div>
                   <p className="text-xs text-slate-600">
-                    Agar aap direct password se kholna chahte hain, toh <strong>"🔑 Password"</strong> tab select karein. Apna email aur password daal kar instant Sign In karein.
+                    Enter your name, email, and choose a secure password (minimum 6 characters). Upon registration, you are immediately routed to configure your gym details and membership packages.
                   </p>
                 </div>
               </div>
@@ -212,31 +210,31 @@ export const UserManualModal: React.FC<UserManualModalProps> = ({ isOpen, onClos
             <div className="space-y-5 animate-in fade-in duration-150">
               <h3 className="text-base font-bold text-slate-900 flex items-center space-x-2">
                 <Users className="w-5 h-5 text-teal-600" />
-                <span>Naye Member ka Registration aur Plans</span>
+                <span>Member Registration, Packages & Renewals</span>
               </h3>
 
               <div className="space-y-3 text-xs text-slate-700">
                 <div className="p-3 bg-slate-50 rounded-xl border border-slate-200 flex items-start space-x-2">
                   <CheckCircle className="w-4 h-4 text-teal-600 shrink-0 mt-0.5" />
                   <div>
-                    <strong className="text-slate-900">Step 1: + Add Member par click karein:</strong>
-                    <p className="text-slate-500 mt-0.5">Member ka Name, Mobile Number, Gender, aur Batch (Morning/Evening) enter karein.</p>
+                    <strong className="text-slate-900">Step 1: Click + Add Member</strong>
+                    <p className="text-slate-500 mt-0.5">Enter member details: Full Name, 10-digit mobile number, gender, and personal training options if applicable.</p>
                   </div>
                 </div>
 
                 <div className="p-3 bg-slate-50 rounded-xl border border-slate-200 flex items-start space-x-2">
                   <CheckCircle className="w-4 h-4 text-teal-600 shrink-0 mt-0.5" />
                   <div>
-                    <strong className="text-slate-900">Step 2: Plan Select karein:</strong>
-                    <p className="text-slate-500 mt-0.5">1 Mahina, 3 Mahina, 6 Mahina ya 1 Saal ka membership plan chunein. Expiry date automatically calculate ho jayegi.</p>
+                    <strong className="text-slate-900">Step 2: Assign Membership Plan</strong>
+                    <p className="text-slate-500 mt-0.5">Select Monthly, Quarterly, Semi-Annual, or Annual plan. The system automatically computes the precise expiry date.</p>
                   </div>
                 </div>
 
                 <div className="p-3 bg-slate-50 rounded-xl border border-slate-200 flex items-start space-x-2">
                   <CheckCircle className="w-4 h-4 text-teal-600 shrink-0 mt-0.5" />
                   <div>
-                    <strong className="text-slate-900">Step 3: WhatsApp Welcome Message:</strong>
-                    <p className="text-slate-500 mt-0.5">Member add hote hi ek click mein unke phone par gym ka official welcome message aur fee receipt send ho jata hai.</p>
+                    <strong className="text-slate-900">Step 3: Instant WhatsApp Welcome Message</strong>
+                    <p className="text-slate-500 mt-0.5">Once registered, send an official gym welcome message and digital receipt to the member's WhatsApp in one tap.</p>
                   </div>
                 </div>
               </div>
@@ -248,27 +246,27 @@ export const UserManualModal: React.FC<UserManualModalProps> = ({ isOpen, onClos
             <div className="space-y-5 animate-in fade-in duration-150">
               <h3 className="text-base font-bold text-slate-900 flex items-center space-x-2">
                 <CreditCard className="w-5 h-5 text-teal-600" />
-                <span>Fees Collection aur Dynamic UPI QR Code</span>
+                <span>Fee Collection & Dynamic UPI QR Codes</span>
               </h3>
 
               <div className="grid grid-cols-1 sm:grid-cols-2 gap-4">
                 <div className="p-4 bg-teal-50/50 rounded-xl border border-teal-200 text-xs space-y-2">
                   <div className="font-bold text-teal-900 flex items-center space-x-1.5">
                     <QrCode className="w-4 h-4 text-teal-700" />
-                    <span>Instant UPI QR Code</span>
+                    <span>Dynamic UPI QR Code</span>
                   </div>
                   <p className="text-slate-600">
-                    Aapke gym ki UPI ID par exact fee amount ka QR code screen par dikh jata hai. Member GPay, PhonePe ya Paytm se scan karke direct aapke bank account me transfer kar sakta hai.
+                    Display an on-screen QR code pre-filled with the exact fee amount and your gym UPI ID. Members can scan with Google Pay, PhonePe, or Paytm for direct bank settlement.
                   </p>
                 </div>
 
                 <div className="p-4 bg-slate-50 rounded-xl border border-slate-200 text-xs space-y-2">
                   <div className="font-bold text-slate-900 flex items-center space-x-1.5">
                     <Printer className="w-4 h-4 text-slate-700" />
-                    <span>Digital Bill & WhatsApp Receipt</span>
+                    <span>Receipts & Thermal Printing</span>
                   </div>
                   <p className="text-slate-600">
-                    Payment enter karte hi GST/Gym bill generate ho jata hai. Aap thermal printer se print kar sakte hain ya WhatsApp par receipt link send kar sakte hain.
+                    Immediately print thermal receipts or generate shareable digital payment confirmation links directly over WhatsApp.
                   </p>
                 </div>
               </div>
@@ -280,20 +278,20 @@ export const UserManualModal: React.FC<UserManualModalProps> = ({ isOpen, onClos
             <div className="space-y-5 animate-in fade-in duration-150">
               <h3 className="text-base font-bold text-slate-900 flex items-center space-x-2">
                 <QrCode className="w-5 h-5 text-teal-600" />
-                <span>Daily Member Attendance & QR Check-in</span>
+                <span>Daily Attendance & Check-in Logging</span>
               </h3>
 
               <div className="space-y-3 text-xs text-slate-700">
                 <div className="p-3 bg-slate-50 rounded-xl border border-slate-200">
-                  <strong className="text-slate-900">1-Second Fast Check-In:</strong>
+                  <strong className="text-slate-900">Fast 1-Click Check-in:</strong>
                   <p className="text-slate-500 mt-1">
-                    Attendance tab mein member ka naam ya mobile number search karein aur "Check In" button dabayein. Time aur date automatically record ho jati hai.
+                    Search the member by name or mobile number and click "Check In". The check-in timestamp and membership validity status are logged instantly.
                   </p>
                 </div>
                 <div className="p-3 bg-slate-50 rounded-xl border border-slate-200">
                   <strong className="text-slate-900">Counter QR Code:</strong>
                   <p className="text-slate-500 mt-1">
-                    Gym entrance par QR code display karein jise members scan karke attendance mark kar sakein.
+                    Display the QR code at your reception counter so members can self check-in seamlessly.
                   </p>
                 </div>
               </div>
@@ -304,18 +302,18 @@ export const UserManualModal: React.FC<UserManualModalProps> = ({ isOpen, onClos
           {activeSection === 'faq' && (
             <div className="space-y-4 animate-in fade-in duration-150 text-xs text-slate-700">
               <div className="p-3.5 bg-slate-50 rounded-xl border border-slate-200 space-y-1">
-                <div className="font-bold text-slate-900 text-sm">Q: Kya phone aur laptop dono par ek sath chalega?</div>
-                <p className="text-slate-600">Haan, receptionist counter ke computer par chala sakta hai aur gym owner apne mobile par real-time reports dekh sakta hai.</p>
+                <div className="font-bold text-slate-900 text-sm">Can multiple devices operate simultaneously?</div>
+                <p className="text-slate-600">Yes. The reception desktop, manager's laptop, and gym owner's phone stay synchronized in real time via live cloud database synchronization.</p>
               </div>
 
               <div className="p-3.5 bg-slate-50 rounded-xl border border-slate-200 space-y-1">
-                <div className="font-bold text-slate-900 text-sm">Q: Agar member chhutti ya bimar ho jaye toh membership hold kaise karein?</div>
-                <p className="text-slate-600">Member profile open karein aur "Hold Membership" par click karein. Jitne din wo nahi aayega utne din uski expiry date aage badh jayegi!</p>
+                <div className="font-bold text-slate-900 text-sm">How do I hold or pause a member's package?</div>
+                <p className="text-slate-600">Open the member's profile and click "Hold Membership". Specify the hold dates, and the system automatically extends their expiry date by the corresponding number of days.</p>
               </div>
 
               <div className="p-3.5 bg-slate-50 rounded-xl border border-slate-200 space-y-1">
-                <div className="font-bold text-slate-900 text-sm">Q: Kya WhatsApp reminders ke liye phone number save karna padega?</div>
-                <p className="text-slate-600">Bilkul nahi! Kru Fitness direct WhatsApp API se chalta hai, bina number save kiye ek click me WhatsApp open ho jata hai.</p>
+                <div className="font-bold text-slate-900 text-sm">Do I need to save member numbers to send WhatsApp reminders?</div>
+                <p className="text-slate-600">No. Kru Fitness uses direct WhatsApp integration to launch personalized message templates without requiring numbers to be saved in your contact book.</p>
               </div>
             </div>
           )}
@@ -323,10 +321,10 @@ export const UserManualModal: React.FC<UserManualModalProps> = ({ isOpen, onClos
 
         {/* Modal Footer */}
         <div className="bg-slate-50 border-t border-slate-200 px-6 py-3.5 flex items-center justify-between text-xs text-slate-500">
-          <span>Kru Fitness Cloud OS • Designed for high-performance gyms</span>
+          <span>Kru Fitness Cloud OS • Built for modern fitness centers</span>
           <button
             onClick={onClose}
-            className="px-4 py-2 bg-slate-900 hover:bg-slate-800 text-white font-semibold rounded-xl transition-colors"
+            className="px-4 py-2 bg-slate-900 hover:bg-slate-800 text-white font-semibold rounded-xl transition-colors cursor-pointer"
           >
             Close Guide
           </button>

@@ -77,24 +77,24 @@ export const GymSetupModal: React.FC<Props> = ({ isOpen, onClose }) => {
   };
 
   return (
-    <div className="fixed inset-0 z-50 flex items-center justify-center bg-slate-900/80 p-4 backdrop-blur-xs overflow-y-auto">
-      <div className="w-full max-w-lg bg-white rounded-2xl shadow-2xl border border-slate-200 overflow-hidden my-6">
+    <div className="fixed inset-0 z-50 flex items-center justify-center bg-slate-950/80 p-3 sm:p-6 backdrop-blur-sm overflow-y-auto">
+      <div className="w-full max-w-xl bg-white rounded-3xl shadow-2xl border border-slate-200 overflow-hidden my-auto">
         {/* Header */}
-        <div className="bg-slate-900 text-white p-6 border-b border-slate-800 flex items-center justify-between">
+        <div className="bg-teal-800 text-white p-5 sm:p-6 border-b border-teal-700 flex items-center justify-between">
           <div className="flex items-center space-x-3">
-            <div className="p-2.5 bg-blue-600/20 text-blue-400 rounded-xl border border-blue-500/30">
+            <div className="p-2.5 bg-white/10 text-white rounded-xl border border-white/20">
               <Building2 className="w-6 h-6" />
             </div>
             <div>
               <h2 className="text-xl font-bold">Register Your Gym</h2>
-              <p className="text-xs text-slate-400 mt-0.5">Quick setup for your fitness center</p>
+              <p className="text-xs text-teal-200 mt-0.5">Quick setup for your fitness center</p>
             </div>
           </div>
           <button
             type="button"
             onClick={() => signOut()}
             title="Sign out / Switch account"
-            className="flex items-center space-x-1 px-3 py-1.5 rounded-lg bg-slate-800 hover:bg-slate-700 text-slate-300 hover:text-white text-xs font-medium border border-slate-700 transition-colors"
+            className="flex items-center space-x-1 px-3 py-1.5 rounded-lg bg-teal-900/60 hover:bg-teal-900 text-teal-200 hover:text-white text-xs font-medium border border-teal-700/60 transition-colors"
           >
             <LogOut className="w-3.5 h-3.5" />
             <span>Sign out</span>
@@ -102,16 +102,16 @@ export const GymSetupModal: React.FC<Props> = ({ isOpen, onClose }) => {
         </div>
 
         {/* Content */}
-        <form onSubmit={handleSubmit} className="p-6 space-y-5">
+        <form onSubmit={handleSubmit} className="p-5 sm:p-7 space-y-5">
           {errorMsg && (
-            <div className="p-3 bg-red-50 border border-red-200/80 rounded-xl text-xs text-red-700 font-medium">
+            <div className="p-3.5 bg-red-50 border border-red-200 rounded-xl text-xs sm:text-sm text-red-700 font-medium">
               {errorMsg}
             </div>
           )}
 
           <div className="space-y-4">
             <div>
-              <label className="block text-xs font-bold text-slate-800 uppercase tracking-wider mb-1">
+              <label className="block text-xs font-bold text-slate-800 uppercase tracking-wider mb-1.5">
                 Gym Name <span className="text-red-500">*</span>
               </label>
               <input
@@ -120,13 +120,13 @@ export const GymSetupModal: React.FC<Props> = ({ isOpen, onClose }) => {
                 value={name}
                 onChange={e => setName(e.target.value)}
                 placeholder="e.g. Iron Fitness Gym"
-                className="w-full px-3.5 py-2 text-sm border border-slate-300 rounded-xl focus:ring-2 focus:ring-blue-600 focus:outline-none"
+                className="w-full h-11 px-3.5 text-base sm:text-sm border border-slate-300 rounded-xl focus:ring-2 focus:ring-teal-700 focus:outline-none"
               />
             </div>
 
             <div className="grid grid-cols-1 sm:grid-cols-2 gap-4">
               <div>
-                <label className="block text-xs font-bold text-slate-800 uppercase tracking-wider mb-1">
+                <label className="block text-xs font-bold text-slate-800 uppercase tracking-wider mb-1.5">
                   Owner / Manager Name <span className="text-red-500">*</span>
                 </label>
                 <input
@@ -135,12 +135,12 @@ export const GymSetupModal: React.FC<Props> = ({ isOpen, onClose }) => {
                   value={ownerName}
                   onChange={e => setOwnerName(e.target.value)}
                   placeholder="e.g. Rajesh Sharma"
-                  className="w-full px-3.5 py-2 text-sm border border-slate-300 rounded-xl focus:ring-2 focus:ring-blue-600 focus:outline-none"
+                  className="w-full h-11 px-3.5 text-base sm:text-sm border border-slate-300 rounded-xl focus:ring-2 focus:ring-teal-700 focus:outline-none"
                 />
               </div>
 
               <div>
-                <label className="block text-xs font-bold text-slate-800 uppercase tracking-wider mb-1">
+                <label className="block text-xs font-bold text-slate-800 uppercase tracking-wider mb-1.5">
                   Mobile Number <span className="text-red-500">*</span>
                 </label>
                 <input
@@ -150,14 +150,14 @@ export const GymSetupModal: React.FC<Props> = ({ isOpen, onClose }) => {
                   value={phone}
                   onChange={e => setPhone(e.target.value.replace(/\D/g, ''))}
                   placeholder="10-digit mobile number"
-                  className="w-full px-3.5 py-2 text-sm font-mono border border-slate-300 rounded-xl focus:ring-2 focus:ring-blue-600 focus:outline-none"
+                  className="w-full h-11 px-3.5 text-base sm:text-sm font-mono border border-slate-300 rounded-xl focus:ring-2 focus:ring-teal-700 focus:outline-none"
                 />
               </div>
             </div>
 
             <div className="grid grid-cols-1 sm:grid-cols-2 gap-4">
               <div>
-                <label className="block text-xs font-bold text-slate-800 uppercase tracking-wider mb-1">
+                <label className="block text-xs font-bold text-slate-800 uppercase tracking-wider mb-1.5">
                   City / Location
                 </label>
                 <input
@@ -165,12 +165,12 @@ export const GymSetupModal: React.FC<Props> = ({ isOpen, onClose }) => {
                   value={city}
                   onChange={e => setCity(e.target.value)}
                   placeholder="e.g. Indore, Pune, Delhi"
-                  className="w-full px-3.5 py-2 text-sm border border-slate-300 rounded-xl focus:ring-2 focus:ring-blue-600 focus:outline-none"
+                  className="w-full h-11 px-3.5 text-base sm:text-sm border border-slate-300 rounded-xl focus:ring-2 focus:ring-teal-700 focus:outline-none"
                 />
               </div>
 
               <div>
-                <label className="block text-xs font-bold text-slate-800 uppercase tracking-wider mb-1">
+                <label className="block text-xs font-bold text-slate-800 uppercase tracking-wider mb-1.5">
                   Full Address (Optional)
                 </label>
                 <input
@@ -178,7 +178,7 @@ export const GymSetupModal: React.FC<Props> = ({ isOpen, onClose }) => {
                   value={address}
                   onChange={e => setAddress(e.target.value)}
                   placeholder="Shop No., Street / Area"
-                  className="w-full px-3.5 py-2 text-sm border border-slate-300 rounded-xl focus:ring-2 focus:ring-blue-600 focus:outline-none"
+                  className="w-full h-11 px-3.5 text-base sm:text-sm border border-slate-300 rounded-xl focus:ring-2 focus:ring-teal-700 focus:outline-none"
                 />
               </div>
             </div>
@@ -186,7 +186,7 @@ export const GymSetupModal: React.FC<Props> = ({ isOpen, onClose }) => {
             {/* Attendance Choice */}
             <div className="p-4 bg-slate-50 border border-slate-200 rounded-2xl space-y-3">
               <div className="flex items-center space-x-2">
-                <Clock className="w-4 h-4 text-blue-600" />
+                <Clock className="w-4 h-4 text-teal-700" />
                 <label className="text-sm font-bold text-slate-900">Do you want to enable attendance?</label>
               </div>
               <p className="text-xs text-slate-500">
@@ -198,26 +198,26 @@ export const GymSetupModal: React.FC<Props> = ({ isOpen, onClose }) => {
                 <button
                   type="button"
                   onClick={() => setAttendanceEnabled(false)}
-                  className={`py-2.5 px-3 rounded-xl border text-xs font-semibold flex items-center justify-center space-x-1.5 transition-colors ${
+                  className={`py-2.5 px-3 rounded-xl border text-xs font-semibold flex items-center justify-center space-x-1.5 transition-colors cursor-pointer ${
                     !attendanceEnabled
-                      ? 'border-blue-600 bg-blue-50 text-blue-800 ring-2 ring-blue-500/20'
+                      ? 'border-teal-700 bg-teal-50 text-teal-900 ring-2 ring-teal-600/20'
                       : 'border-slate-300 bg-white text-slate-700 hover:bg-slate-50'
                   }`}
                 >
-                  <CheckCircle2 className={`w-3.5 h-3.5 ${!attendanceEnabled ? 'text-blue-600' : 'opacity-0'}`} />
+                  <CheckCircle2 className={`w-3.5 h-3.5 ${!attendanceEnabled ? 'text-teal-700' : 'opacity-0'}`} />
                   <span>Skip for now</span>
                 </button>
 
                 <button
                   type="button"
                   onClick={() => setAttendanceEnabled(true)}
-                  className={`py-2.5 px-3 rounded-xl border text-xs font-semibold flex items-center justify-center space-x-1.5 transition-colors ${
+                  className={`py-2.5 px-3 rounded-xl border text-xs font-semibold flex items-center justify-center space-x-1.5 transition-colors cursor-pointer ${
                     attendanceEnabled
-                      ? 'border-blue-600 bg-blue-50 text-blue-800 ring-2 ring-blue-500/20'
+                      ? 'border-teal-700 bg-teal-50 text-teal-900 ring-2 ring-teal-600/20'
                       : 'border-slate-300 bg-white text-slate-700 hover:bg-slate-50'
                   }`}
                 >
-                  <CheckCircle2 className={`w-3.5 h-3.5 ${attendanceEnabled ? 'text-blue-600' : 'opacity-0'}`} />
+                  <CheckCircle2 className={`w-3.5 h-3.5 ${attendanceEnabled ? 'text-teal-700' : 'opacity-0'}`} />
                   <span>Enable Attendance</span>
                 </button>
               </div>
@@ -228,7 +228,7 @@ export const GymSetupModal: React.FC<Props> = ({ isOpen, onClose }) => {
             <button
               type="submit"
               disabled={loading}
-              className="w-full py-3 px-4 bg-blue-600 hover:bg-blue-700 text-white font-bold rounded-xl shadow-xs transition-colors text-sm disabled:opacity-50 flex items-center justify-center space-x-2"
+              className="w-full h-12 flex items-center justify-center space-x-2 py-3 px-4 bg-teal-700 hover:bg-teal-800 text-white font-bold rounded-xl shadow-md transition-colors disabled:opacity-50 active:scale-98 cursor-pointer"
             >
               <Dumbbell className="w-4 h-4" />
               <span>{loading ? 'Creating Gym Workspace...' : 'Launch Gym Dashboard'}</span>

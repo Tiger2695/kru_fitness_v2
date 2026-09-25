@@ -117,7 +117,7 @@ function MainApp() {
   // If user is not authenticated, show sign in / sign up
   if (!user) {
     return (
-      <div className="min-h-screen bg-slate-50 flex flex-col justify-center items-center p-4">
+      <>
         <AuthModal
           isOpen={true}
           onOpenDatabaseSetup={() => setIsDbModalOpen(true)}
@@ -131,7 +131,7 @@ function MainApp() {
           isOpen={isManualOpen}
           onClose={() => setIsManualOpen(false)}
         />
-      </div>
+      </>
     );
   }
 
